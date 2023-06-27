@@ -14,12 +14,28 @@ const Product = () => {
       .then(data => setItem(data));
   }, [])
 
-  const addCartHandler = (itemId) => {  
+  const addCartHandler = (itemId) => {
     dispatch({ type: 'ADD_TO_CART', payload: { itemId: itemId } })
   }
 
-  if(!item){
-    return <div>Loading...</div>
+  // const { rating: {rate, count}} = item;
+
+  if (!item) {
+    return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold mb-4">Loading...</h2>
+      </div>
+    </div>)
+  }
+  if (item.length == 0) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4">Loading...</h2>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -29,7 +45,7 @@ const Product = () => {
         <br />
         <div className='flex gap-3'>
           <button className='bg-orange-300 p-3' onClick={() => addCartHandler(item.id)}>Add to Cart</button>
-          <button className='bg-orange-300 p-3'>Buy now</button>
+          <button className='bg-gray-300 text-gray-500 cursor-not-allowed p-3' disabled>Buy now</button>
         </div>
       </Grid>
 

@@ -28,7 +28,7 @@ const LoginPage = () => {
 
     const navigate = useNavigate();
 
-    const [userName, setUserName] = useState();
+    const [userName, setUserName] = useState('');
 
     const navigateFunction = (data) => {
         const { name, password } = data;
@@ -38,10 +38,6 @@ const LoginPage = () => {
             navigate('/products')
         }
     }
-
-    useEffect(()=>{
-        dispatch({type:"USER_NAME", payload:{userName: userName}})
-    }, [])
 
     return (
         <div className="flex items-center justify-center min-h-screen" style={{ backgroundImage: `url(${background})`, backgroundSize:"cover" }}>

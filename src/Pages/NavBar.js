@@ -1,5 +1,5 @@
 import { Badge, Button, InputAdornment, OutlinedInput } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { FiShoppingCart } from 'react-icons/fi';
 import { Link, useLocation } from 'react-router-dom';
@@ -10,10 +10,11 @@ const NavBar = () => {
   const count = useSelector((state) => state.count);
   const userName = useSelector((state) => state.userName);
 
+  const [queryParam, setQueryParam] = useState();
+
   console.log(userName)
 
   const location = useLocation();
-  // console.log(location)
 
   return (
     <header className="sticky top-0 bg-gray-100 text-white py-4 px-6 grid grid-cols-2">
@@ -28,6 +29,9 @@ const NavBar = () => {
         <OutlinedInput
         id="outlined-adornment-weight"
         size="small"
+        value={queryParam}
+        placeholder='Search products...'
+        onChange={(e) => setQueryParam(e.target.value)}
         endAdornment={
           <InputAdornment position="end">
               <BiSearch className="cursor-pointer" />
@@ -38,9 +42,18 @@ const NavBar = () => {
           }}
           />
         }
+        <>
+        {location.pathname === '/' &&  
           <Link to="/" className="ml-2">
             <Button>Login</Button>
           </Link>
+        }
+        {location.pathname === '/cart' &&  
+          <Link to=".." relative='path'>
+            <button className='bg-blue-500 py-2 px-3'>Back</button>
+          </Link>
+        }
+        </>
         <Link to="/cart" className="ml-2">
           <Button className="text-blue-500">
             <Badge badgeContent={count} color="primary">

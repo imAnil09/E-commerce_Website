@@ -3,7 +3,6 @@ import { createStore } from "redux";
 const initialState = {
     count: 0,
     cartItems: [],
-    userName: '',
 };
 
 const { count, cartItems } = initialState;
