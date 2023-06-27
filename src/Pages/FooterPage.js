@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const FooterPage = () => {
     return (
-        <div class="flex flex-col min-h-screen">
+        <div class="flex flex-col">
             <div class="flex-auto">
             </div>
             <footer class="bg-gray-700 text-white py-4 px-6 text-center">
@@ -22,4 +22,4 @@ const FooterPage = () => {
     )
 }
 
-export default FooterPage
+export default React.memo(FooterPage)

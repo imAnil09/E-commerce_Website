@@ -27,9 +27,9 @@ const Product = () => {
       <Grid sm={12} lg={5.5} item style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", margin: "1.5rem" }}>
         <img src={item.image} alt={item.title} style={{ border: "1px solid gray", borderRadius: "5px", padding: "2rem" }} width="400px" height="300px" />
         <br />
-        <div>
-          <Button onClick={() => addCartHandler(item.id)}>Add to Cart</Button>
-          <Button>Buy now</Button>
+        <div className='flex gap-3'>
+          <button className='bg-orange-300 p-3' onClick={() => addCartHandler(item.id)}>Add to Cart</button>
+          <button className='bg-orange-300 p-3'>Buy now</button>
         </div>
       </Grid>
 

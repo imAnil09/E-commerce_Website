@@ -25,9 +25,18 @@ const Cart = () => {
   if (!items) {
     return <div>Loading...</div>;
   }
+  if(items.length == 0){
+      return (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="p-8 bg-white rounded shadow-lg w-64 sm:w-96">
+            <h2 className="text-2xl font-bold mb-4">Your Cart Is Empty</h2>
+            <p className="text-gray-600">Please add some items to your cart.</p>
+          </div>
+        </div>
+      );
+  }
 
   return (
-    <React.Fragment>
       <ul style={{listStyle:"none"}}>
         {items.map((item) => (
             <>
@@ -46,7 +55,6 @@ const Cart = () => {
           </>
         ))}
       </ul>
-    </React.Fragment>
   );
 };
 

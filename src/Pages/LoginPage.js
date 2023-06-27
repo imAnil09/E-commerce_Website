@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -6,6 +6,8 @@ import { ErrorMessage } from '@hookform/error-message';
 import { useNavigate } from 'react-router-dom';
 import TextFieldComponent from '../Components/TextFieldComponent';
 import { Button } from '@mui/material';
+import background from '../images/woman-holding-various-shopping-bags-copy-space.jpg';
+import { useDispatch } from 'react-redux';
 
 const LoginPage = () => {
 
@@ -21,8 +23,12 @@ const LoginPage = () => {
 
     const { register, handleSubmit, formState: { errors } } = methods;
 
-    //   useStates
+    //   hooks
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
+
+    const [userName, setUserName] = useState();
 
     const navigateFunction = (data) => {
         const { name, password } = data;
@@ -33,8 +39,12 @@ const LoginPage = () => {
         }
     }
 
+    useEffect(()=>{
+        dispatch({type:"USER_NAME", payload:{userName: userName}})
+    }, [])
+
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="flex items-center justify-center min-h-screen" style={{ backgroundImage: `url(${background})`, backgroundSize:"cover" }}>
             <FormProvider {...methods}>
                 <form onSubmit={handleSubmit(navigateFunction)} className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
                     <h2 className="text-2xl font-bold mb-6 text-center">Login Page</h2>
@@ -43,7 +53,7 @@ const LoginPage = () => {
                     <ErrorMessage errors={errors} name='name' message='This is required!' />
                     <br />
                     <br />
-                    <TextFieldComponent name={'password'} placeholder={'Enter email'} type={'password'} />
+                    <TextFieldComponent name={'password'} placeholder={'Enter password'} type={'password'} />
                     <br />
                     <ErrorMessage errors={errors} name='password' message='This is required!' />
                     <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-6 rounded" type="submit">LogIn</button>
