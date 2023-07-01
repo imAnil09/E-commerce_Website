@@ -1,20 +1,26 @@
 import { Badge, Button, InputAdornment, OutlinedInput } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { FiShoppingCart } from 'react-icons/fi';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../images/logo.png';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const NavBar = () => {
   const count = useSelector((state) => state.count);
-  const userName = useSelector((state) => state.userName);
+
+  const inputRef = useRef();
+
+  const dispatch = useDispatch();
 
   const [queryParam, setQueryParam] = useState();
 
-  console.log(userName)
-
   const location = useLocation();
+
+  const handleGlobalSearch = () => {
+    dispatch({type: 'SEARCH_QUERY', payload: {query: queryParam }})
+  }
+  
 
   return (
     <header className="sticky top-0 bg-gray-100 text-white py-4 px-6 grid grid-cols-2">
@@ -29,12 +35,18 @@ const NavBar = () => {
         <OutlinedInput
         id="outlined-adornment-weight"
         size="small"
+        ref={inputRef.focus}
         value={queryParam}
         placeholder='Search products...'
+        onKeyDown={(e) => {
+          if(e.keyCode == 13){
+            handleGlobalSearch()
+          }
+        }}
         onChange={(e) => setQueryParam(e.target.value)}
         endAdornment={
           <InputAdornment position="end">
-              <BiSearch className="cursor-pointer" />
+              <BiSearch className="cursor-pointer"  onClick={handleGlobalSearch}/>
             </InputAdornment>
           }
           inputProps={{

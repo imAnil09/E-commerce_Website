@@ -3,6 +3,7 @@ import { createStore } from "redux";
 const initialState = {
     count: 0,
     cartItems: [],
+    query: ''
 };
 
 const { count, cartItems } = initialState;
@@ -20,6 +21,12 @@ const reducerFn = (state = initialState, action) => {
             count: state.count + 1
 
       };
+      case 'SEARCH_QUERY': {
+        return {
+          query: state.query = action.payload.query
+
+        }
+      }
     default:
       return state;
   }

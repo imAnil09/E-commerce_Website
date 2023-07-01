@@ -1,28 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import ProductsCard from '../Components/ProductsCard';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+// import { store } from '../Store/store';
 
 const ProductsPage = () => {
+
+  const storeQuery = useSelector((state) => state.query)
+  
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
+  // console.log(storeQuery || '')
+
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
+      fetch(`http://localhost:8080/products${storeQuery.length > 0 ? "?q=" + storeQuery : '/'}`)
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(e => console.log(e));
-  }, []);
+  }, [storeQuery]);
 
   if (!products) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4">Loading...</h2>
+        </div>
+      </div>
+    );
   }
+
   if(products.length == 0){
     return (
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">Loading...</h2>
-          </div>
+      <>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="p-8 bg-gray-100 rounded shadow-lg w-64 sm:w-96">
+          <h2 className="text-2xl text-center font-bold mb-4">No Data Found</h2>
+          {/* <p className="text-gray-600">Please add some items to your cart.</p> */}
+        {/* <Link to="/products"><button className='bg-blue-300 font-semibold py-2 px-3 rounded mt-3'>Search again!</button></Link> */}
         </div>
+      </div>
+        </>
       );
   }
 

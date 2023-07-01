@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 
 const FooterPage = () => {
     return (
-        <div class="flex flex-col">
-            <div class="flex-auto">
+        <div className="flex flex-col">
+            <div className="flex-auto">
             </div>
-            <footer class="bg-gray-700 text-white py-4 px-6 text-center">
+            <footer className="bg-gray-700 text-white py-4 px-6 text-center">
                 <ul>
                     <li><Link to='/'>Home</Link></li>
                 <li><Link to='/products'>Products</Link></li>
