@@ -14,7 +14,7 @@ const Cart = () => {
     const fetchItems = async () => {
       try {
         const fetchedItems = await Promise.all(cartItems.map((element) =>
-          fetch(`https://fakestoreapi.com/products/${element}`)
+          fetch(`http://localhost:8080/products/${element}`)
             .then((res) => res.json())
         ));
         setItems(fetchedItems);
