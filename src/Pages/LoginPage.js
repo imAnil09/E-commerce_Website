@@ -42,7 +42,7 @@ const LoginPage = () => {
     return (
         <div className="flex items-center justify-center min-h-screen" style={{ backgroundImage: `url(${background})`, backgroundSize:"cover" }}>
             <FormProvider {...methods}>
-                <form onSubmit={handleSubmit(navigateFunction)} className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+                <form onSubmit={handleSubmit(navigateFunction)} className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">      
                     <h2 className="text-2xl font-bold mb-6 text-center">Login Page</h2>
                     <TextFieldComponent name="name" placeholder="Enter Name" type="text" />
                     <br />
