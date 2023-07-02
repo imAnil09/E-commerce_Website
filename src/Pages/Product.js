@@ -9,7 +9,7 @@ const Product = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(`http://localhost:8080/products/${param.id}`)
+    fetch(`https://fakestoreapi.com/products/${param.id}`)
       .then(res => res.json())
       .then(data => setItem(data));
   }, [])
