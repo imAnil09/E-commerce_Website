@@ -14,7 +14,7 @@ const ProductsPage = () => {
   // console.log(storeQuery || '')
 
   useEffect(() => {
-      fetch(`http://localhost:8080/products${storeQuery.length > 0 ? "?q=" + storeQuery : '/'}`)
+      fetch(`https://fakestoreapi.com/products${storeQuery.length > 0 ? "?q=" + storeQuery : '/'}`)
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(e => console.log(e));
