@@ -1,12 +1,14 @@
 import { Button, Grid, Paper, Rating, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 const Product = () => {
   const [item, setItem] = useState();
   const param = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cartItems);
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${param.id}`)
@@ -16,6 +18,10 @@ const Product = () => {
 
   const addCartHandler = (itemId) => {
     dispatch({ type: 'ADD_TO_CART', payload: { itemId: itemId } })
+  }
+
+  const navigateToCart = () => {
+    navigate('/cart')
   }
 
   // const { rating: {rate, count}} = item;
@@ -44,7 +50,13 @@ const Product = () => {
         <img src={item.image} alt={item.title} style={{ border: "1px solid gray", borderRadius: "5px", padding: "2rem" }} width="400px" height="300px" />
         <br />
         <div className='flex gap-3'>
-          <button className='bg-orange-300 p-3' onClick={() => addCartHandler(item.id)}>Add to Cart</button>
+          <button className='bg-orange-300 p-3' onClick={() => {
+            if(cartItems.includes(item.id)){
+              navigateToCart()
+            }else {
+              addCartHandler(item.id)
+            }
+            }}>{cartItems.includes(item.id) ? 'Goto Cart' : 'Add to Cart'}</button>
           <button className='bg-gray-300 text-gray-500 cursor-not-allowed p-3' disabled>Buy now</button>
         </div>
       </Grid>

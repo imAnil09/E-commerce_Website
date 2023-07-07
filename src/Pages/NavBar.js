@@ -2,12 +2,13 @@ import { Badge, Button, InputAdornment, OutlinedInput } from '@mui/material';
 import React, { useRef, useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { FiShoppingCart } from 'react-icons/fi';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png';
 import { useDispatch, useSelector } from 'react-redux';
 
 const NavBar = () => {
   const count = useSelector((state) => state.count);
+  const navigate = useNavigate();
 
   const inputRef = useRef();
 
@@ -23,7 +24,7 @@ const NavBar = () => {
   
 
   return (
-    <header className="sticky top-0 bg-gray-100 text-white py-4 px-6 grid grid-cols-2">
+    <header className="sticky top-0 z-10 bg-gray-100 text-white py-4 px-6 grid grid-cols-2">
       <div className="flex items-center">
         <Link to="/">
           <img src={logo} width="50px" height="50px" alt="e-commerce" />
@@ -61,9 +62,9 @@ const NavBar = () => {
           </Link>
         }
         {location.pathname === '/cart' &&  
-          <Link to=".." relative='path'>
-            <button className='bg-blue-500 py-2 px-3'>Back</button>
-          </Link>
+          // <Link to=".." relative='route'>
+            <button className='bg-blue-500 py-2 px-3' onClick={() => navigate(-1)}>Back</button>
+          // </Link>
         }
         </>
         <Link to="/cart" className="ml-2">
